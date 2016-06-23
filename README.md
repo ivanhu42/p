@@ -1,0 +1,9 @@
+- codeforces
+	- cpp
+		- 1a.cpp
+		- 1b.cpp
+		- ...
+- learn-haskell
+	- h99
+		- h99.hs
+		- h99-analysis.md
