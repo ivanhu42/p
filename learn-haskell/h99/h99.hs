@@ -54,3 +54,22 @@ p9 (x:xs) = (x : takeWhile (== x) xs) : (p9 $ dropWhile (== x) xs)
 p10 :: (Eq a) => [a] -> [(Int, a)]
 p10 []     = []
 p10 (x:xs) = ((length $ x : takeWhile (==x) xs), x) : p10 (dropWhile (==x) xs)
+
+-- P11: modified run-length encoding
+data List a = Multiple Int a | Single a
+  deriving (Show)
+p11 :: (Eq a) => [a] -> [List a]
+p11 = map judge11 . p10
+  where judge11 (1, x) = Single x
+        judge11 (n, x) = Multiple n x
+
+-- decode a run-length encoded list
+p12 :: [List a] -> [a]
+p12 = concatMap judge12
+  where judge12 (Single x) = [x]
+        judge12 (Multiple n x) = replicate n x
+
+r = p12 (p11 [1, 1, 1, 2, 2, 3, 4, 4, 4, 4, 5, 5, 6])
+
+main = do
+  print r
