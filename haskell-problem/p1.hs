@@ -1,4 +1,5 @@
--- given a list of numbers,
+-- p1:
+-- given a list of integers,
 -- choose k numbers from this list,
 -- with the sum equal to s.
 -- how many possible combinations can we get?
@@ -6,35 +7,35 @@
 quickSort :: [Int] -> [Int]
 quickSort []     = []
 quickSort [x]    = [x]
-quickSort (x:xs) = quickSort (takeX x xs) ++ [x] ++ quickSort (dropX x xs)
+quickSort (x:xs) = quickSort (takeXLessFrom x xs) ++ [x] ++ quickSort (dropXLessFrom x xs)
 
-takeX :: Int -> [Int] -> [Int]
-takeX _ []    = []
-takeX n (x:xs)
-  | x < n     = x : takeX n xs
-  | otherwise = takeX n xs
+takeXLessFrom :: Int -> [Int] -> [Int]
+takeXLessFrom _ []    = []
+takeXLessFrom n (x:xs)
+  | x < n     = x : takeXLessFrom n xs
+  | otherwise = takeXLessFrom n xs
 
-dropX :: Int -> [Int] -> [Int]
-dropX _ []    = []
-dropX n (x:xs)
-  | x < n     = dropX n xs
-  | otherwise = x : dropX n xs
+dropXLessFrom :: Int -> [Int] -> [Int]
+dropXLessFrom _ []    = []
+dropXLessFrom n (x:xs)
+  | x < n     = dropXLessFrom n xs
+  | otherwise = x : dropXLessFrom n xs
 
-findCom :: [Int] -> Int -> Int -> [[Int]]
-findCom [] _ _              = []
-findCom (x:xs) 1 s
-  | x == s         = [x] : (findCom xs 1 s)
-  | otherwise      = findCom xs 1 s
-findCom (x:xs) k s = map (x :) (findCom xs (k - 1) (s - x)) ++ findCom xs k s
+findCombination :: [Int] -> Int -> Int -> [[Int]]
+findCombination [] _ _              = []
+findCombination (x:xs) 1 s
+  | x == s         = [x] : (findCombination xs 1 s)
+  | otherwise      = findCombination xs 1 s
+findCombination (x:xs) k s = map (x :) (findCombination xs (k - 1) (s - x)) ++ findCombination xs k s
 
-trimList :: Eq a => [a] -> [a]
-trimList []     = []
-trimList (x:xs) = x : trimList (dropWhile (==x) xs)
+clearList :: Eq a => [a] -> [a]
+clearList []     = []
+clearList (x:xs) = x : clearList (dropWhile (==x) xs)
 
 -- pack-up
-solution :: [Int] -> Int -> Int -> [[Int]]
-solution xs k s = trimList (findCom (quickSort xs) k s)
+solutionP1 :: [Int] -> Int -> Int -> [[Int]]
+solutionP1 xs k s = clearList (findCombination (quickSort xs) k s)
 
-r = solution [-1,0,1,2,-1,4,-2,-2] 3 0
+r = solutionP1 [-1,0,1,2,-1,4,-2,-2] 3 0
 
 main = print r
