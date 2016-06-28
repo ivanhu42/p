@@ -168,7 +168,7 @@ r = sum [1,2,3]
 ```
 quickSort :: Ord a => [a] -> [a]
 quickSort []     = []
-quickSort (x:xs) = quickSort (takeWhile (<x) xs) ++ [x] ++ quickSort (dropWhile (<x) xs)
+quickSort (x:xs) = quickSort (filter (<x) xs) ++ [x] ++ quickSort (filter (>=x) xs)
 
 r = quickSort [1,5,2,4,3]
 -- r: [1,2,3,4,5]

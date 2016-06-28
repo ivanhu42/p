@@ -1,2 +1,8 @@
 
 *.out
+
+*.hi
+
+*.o
+
+haskell-problem/p1
