@@ -23,3 +23,29 @@ clearList :: Eq a => [a] -> [a]
 clearList []     = []
 clearList (x:xs) = x : clearList (dropWhile (==x) xs)
 -- end clearList
+
+-- begin splitBy
+-- usage:
+--    split a list into several sub-lists
+-- example:
+--    r = splitby ' ' "12 23 34"
+-- result:
+--    r: ["12","23","34"]
+splitBy :: Eq a => a -> [a] -> [[a]]
+splitBy _ [] = []
+splitBy c xs = (takeWhile (/=c) xs) : (splitBy c (safeTail (dropWhile (/=c) xs)))
+-- end splitBy
+
+-- begin safeTail
+-- usage:
+--    tail a list. when it's empty, return an empty list
+-- example:
+--    r1 = safeTail [1,2,3]
+--    r2 = safeTail []
+-- result:
+--    r1: [2,3]
+--    r2: []
+safeTail :: [a] -> [a]
+safeTail []     = []
+safeTail (x:xs) = xs
+-- end safeTail
