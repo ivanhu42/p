@@ -8,15 +8,7 @@ niceDiv s n
   | (mod s n) == 0 = div s n
   | otherwise      = (div s n) + 1
 
-safeTail :: [a] -> [a]
-safeTail []     = []
-safeTail (x:xs) = xs
-
-splitBy :: Char -> [Char] -> [[Char]]
-splitBy _ [] = []
-splitBy c xs = (takeWhile (/=c) xs) : (splitBy c (safeTail (dropWhile (/=c) xs)))
-
 main = do
-  str <- getLine
-  let r = map read (splitBy ' ' str)
-  print (solution (r !! 0) (r !! 1) (r !! 2))
+  w <- getLine
+  let [n,m,a] = [read x :: Integer | x <- (words w)]
+  print $ solution n m a
