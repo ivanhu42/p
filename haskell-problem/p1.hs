@@ -5,6 +5,7 @@
 -- how many possible combinations can we get?
 
 import Lily
+import Data.List (sortBy)
 
 findCombination :: [Int] -> Int -> Int -> [[Int]]
 findCombination [] _ _              = []
@@ -14,8 +15,8 @@ findCombination (x:xs) 1 s
 findCombination (x:xs) k s = map (x :) (findCombination xs (k - 1) (s - x)) ++ findCombination xs k s
 
 -- pack-up
-solutionP1 :: [Int] -> Int -> Int -> [[Int]]
-solutionP1 xs k s = clearList (findCombination (quickSort xs) k s)
+solution :: [Int] -> Int -> Int -> [[Int]]
+solution xs k s = clearList (findCombination (sortBy (\x y -> compare x y) xs) k s)
 
-r = solutionP1 [-1,0,1,2,-1,4,-2,-2] 3 0
+r = solution [-1,0,1,2,-1,4,-2,-2] 3 0
 main = print r
