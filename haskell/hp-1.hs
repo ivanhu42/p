@@ -1,11 +1,3 @@
--- title: haskell question 1
--- author: ivanhu42
--- question:
---   given a list of integers,
---   choose k numbers from this list,
---   with the sum equal to s.
---   how many possible combinations can we get?
-
 import Data.List (sortBy)
 
 findCombination :: [Int] -> Int -> Int -> [[Int]]
