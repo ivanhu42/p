@@ -1,3 +1,4 @@
+-- title: H-99
 -- author: ivanhu42
 -- based on problems from <https://wiki.haskell.org/H-99:_Ninety-Nine_Haskell_Problems>
 
