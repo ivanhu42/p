@@ -14,6 +14,11 @@ clearList :: Eq a => [a] -> [a]
 clearList []     = []
 clearList (x:xs) = x : clearList (dropWhile (==x) xs)
 
-r = solution [-1,0,1,2,-1,4,-2,-2] 3 0
-
-main = print r
+main = do
+  w0 <- getLine;
+  w1 <- getLine;
+  let [k, s] = [read x :: Int | x <- (words w0)]
+  let pool   = [read x :: Int | x <- (words w1)]
+  let r      = solution pool k s
+  putStrLn $ show $ length r
+  print r;
