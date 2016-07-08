@@ -1,5 +1,5 @@
 module Main where
-
+  
 solution :: Integer -> Integer -> Integer -> Integer
 solution n m a = (niceDiv n a) * (niceDiv m a)
 
@@ -12,3 +12,4 @@ main = do
   w <- getLine
   let [n,m,a] = [read x :: Integer | x <- (words w)]
   print $ solution n m a
+
