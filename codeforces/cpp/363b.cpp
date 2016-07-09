@@ -16,40 +16,28 @@ typedef long long ll;
 
 int main ()
 {
-        ll n, k, i, h;
-        ll arr[150000];
-        ll rez[150000];
-        rez[0] = 0;
+        int n, k, i, r = 0;
+        int arr[150000];
+        ll a, t0 = 0, t1;
         cin >> n >> k;
-        if (k == n)
+        for (i = 0; i != n; i++)
         {
-                cout << 1 << endl;
-        }
-        else
-        {
-                for (i = 0; i != n; i++)
+                cin >> a;
+                arr[i] = a;
+                t0 += arr[i];
+                if (i < k)
+                        t1 = t0;
+                else
                 {
-                        cin >> h;
-                        arr[i] = h;
-                        if (i < k)
+                        t0 -= arr[i-k];
+                        if (t0 < t1)
                         {
-                                rez[0] += h;
+                                r = i - k + 1;
+                                t1 = t0;
                         }
                 }
-                for (i = 1; k-1+i != n; i++)
-                        rez[i] = rez[i-1] + arr[k-1+i] - arr[-1+i];
-                ll t = rez[0];
-                ll r = 0;
-                for (i = 1; k-1+i != n; i++)
-                {
-                        if (rez[i] < t)
-                        {
-                                t = rez[i];
-                                r = i;
-                        }
-                }
-                cout << r+1 << endl;
         }
+        cout << r+1 << endl;
         return 0;
 }
 
